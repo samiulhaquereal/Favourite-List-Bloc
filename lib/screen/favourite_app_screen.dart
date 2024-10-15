@@ -1,6 +1,7 @@
 import 'package:favouriteapp/bloc/favourite_app/favourite_app_bloc.dart';
 import 'package:favouriteapp/bloc/favourite_app/favourite_app_event.dart';
 import 'package:favouriteapp/bloc/favourite_app/favourite_app_state.dart';
+import 'package:favouriteapp/model/favourite_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,8 +25,11 @@ class FavouriteAppScreen extends StatelessWidget {
                     title: Text(item.title),
                     leading: IconButton(onPressed: () {},
                         icon: const Icon(Icons.check_box_outline_blank)),
-                    trailing: IconButton(onPressed: () {},
-                        icon: const Icon(Icons.favorite_border)),
+                    trailing: IconButton(onPressed: () {
+                      FavouriteItemModel favItem = FavouriteItemModel(title: item.title, id: item.id,isFavourite: item.isFavourite ? false : true);
+                      context.read<FavouriteAppBloc>().add(AddFavouriteItem(favItem));
+                    },
+                        icon: Icon(item.isFavourite ? Icons.favorite : Icons.favorite_border)),
                   ),
                 );
               });

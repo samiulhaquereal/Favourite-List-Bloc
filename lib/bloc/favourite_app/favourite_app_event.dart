@@ -1,32 +1,18 @@
 import 'package:equatable/equatable.dart';
+import 'package:favouriteapp/model/favourite_item_model.dart';
 
 abstract class FavouriteAppEvent extends Equatable {
   const FavouriteAppEvent();
-}
-
-class FetchFavouriteList extends FavouriteAppEvent{
 
   @override
   List<Object> get props => [];
 }
 
-class AddCheckMark extends FavouriteAppEvent{
+class FetchFavouriteList extends FavouriteAppEvent{}
 
-  @override
-  List<Object> get props => [];
-}
-class RemoveCheckMark extends FavouriteAppEvent{
+class AddCheckMark extends FavouriteAppEvent{}
 
-  @override
-  List<Object> get props => [];
-}
 class AddFavouriteItem extends FavouriteAppEvent{
-
-  @override
-  List<Object> get props => [];
-}
-class RemoveFavouriteItem extends FavouriteAppEvent{
-
-  @override
-  List<Object> get props => [];
+  const AddFavouriteItem(this.item);
+  final FavouriteItemModel item;
 }
