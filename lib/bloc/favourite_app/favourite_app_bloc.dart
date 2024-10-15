@@ -10,6 +10,7 @@ class FavouriteAppBloc extends Bloc<FavouriteAppEvent, FavouriteAppState> {
     on<FetchFavouriteList>(_fetchFavouriteList);
     on<AddFavouriteItem>(_addFavouriteItem);
     on<AddCheckMark>(_checkItem);
+    on<DeleteItem>(_deleteItem);
   }
 
   FavouriteRepository favouriteRepository;
@@ -29,6 +30,20 @@ class FavouriteAppBloc extends Bloc<FavouriteAppEvent, FavouriteAppState> {
   void _checkItem(AddCheckMark event,Emitter<FavouriteAppState> emit)async{
     final index = itemList.indexWhere((element)=> element.id == event.item.id);
     itemList[index] = event.item;
+    emit(state.copyWith(favouriteItemList: List.from(itemList)));
+  }
+
+  void _deleteItem(DeleteItem event,Emitter<FavouriteAppState> emit)async{
+    List<int> indexs = [];
+    for (int i = 0; i < itemList.length; i++) {
+      if (itemList[i].isDelete == true) {
+        indexs.add(i);
+      }
+    }
+    indexs.sort((a, b) => b.compareTo(a));
+    for (int index in indexs) {
+      itemList.removeAt(index);
+    }
     emit(state.copyWith(favouriteItemList: List.from(itemList)));
   }
 }

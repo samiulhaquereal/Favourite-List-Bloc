@@ -19,3 +19,5 @@ class AddFavouriteItem extends FavouriteAppEvent{
   const AddFavouriteItem(this.item);
   final FavouriteItemModel item;
 }
+
+class DeleteItem extends FavouriteAppEvent{}

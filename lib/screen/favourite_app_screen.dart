@@ -12,7 +12,11 @@ class FavouriteAppScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<FavouriteAppBloc>().add(FetchFavouriteList());
     return SafeArea(child: Scaffold(
-      appBar: AppBar(title: const Text('Favourite App'), centerTitle: true,),
+      appBar: AppBar(title: const Text('Favourite App'), centerTitle: true,actions: [
+        IconButton(onPressed: (){
+          context.read<FavouriteAppBloc>().add(DeleteItem());
+        }, icon: const Icon(Icons.delete))
+      ],),
       body: BlocBuilder<FavouriteAppBloc, FavouriteAppState>(
         builder: (context, state) {
           return state.listStatus == ListStatus.loading ? const Center(child: CircularProgressIndicator()) : ListView.builder(
