@@ -10,7 +10,10 @@ abstract class FavouriteAppEvent extends Equatable {
 
 class FetchFavouriteList extends FavouriteAppEvent{}
 
-class AddCheckMark extends FavouriteAppEvent{}
+class AddCheckMark extends FavouriteAppEvent{
+  const AddCheckMark(this.item);
+  final FavouriteItemModel item;
+}
 
 class AddFavouriteItem extends FavouriteAppEvent{
   const AddFavouriteItem(this.item);

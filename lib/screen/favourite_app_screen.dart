@@ -23,10 +23,13 @@ class FavouriteAppScreen extends StatelessWidget {
                   elevation: 1,
                   child: ListTile(
                     title: Text(item.title),
-                    leading: IconButton(onPressed: () {},
-                        icon: const Icon(Icons.check_box_outline_blank)),
+                    leading: IconButton(onPressed: () {
+                      FavouriteItemModel checkItem = FavouriteItemModel(title: item.title, id: item.id,isDelete: item.isDelete ? false : true,isFavourite: item.isFavourite);
+                      context.read<FavouriteAppBloc>().add(AddCheckMark(checkItem));
+                    },
+                        icon: Icon(item.isDelete ? Icons.check_box : Icons.check_box_outline_blank)),
                     trailing: IconButton(onPressed: () {
-                      FavouriteItemModel favItem = FavouriteItemModel(title: item.title, id: item.id,isFavourite: item.isFavourite ? false : true);
+                      FavouriteItemModel favItem = FavouriteItemModel(title: item.title, id: item.id,isFavourite: item.isFavourite ? false : true,isDelete: item.isDelete);
                       context.read<FavouriteAppBloc>().add(AddFavouriteItem(favItem));
                     },
                         icon: Icon(item.isFavourite ? Icons.favorite : Icons.favorite_border)),

@@ -9,6 +9,7 @@ class FavouriteAppBloc extends Bloc<FavouriteAppEvent, FavouriteAppState> {
   FavouriteAppBloc(this.favouriteRepository) : super(const FavouriteAppState()) {
     on<FetchFavouriteList>(_fetchFavouriteList);
     on<AddFavouriteItem>(_addFavouriteItem);
+    on<AddCheckMark>(_checkItem);
   }
 
   FavouriteRepository favouriteRepository;
@@ -20,6 +21,12 @@ class FavouriteAppBloc extends Bloc<FavouriteAppEvent, FavouriteAppState> {
   }
 
   void _addFavouriteItem(AddFavouriteItem event,Emitter<FavouriteAppState> emit)async{
+    final index = itemList.indexWhere((element)=> element.id == event.item.id);
+    itemList[index] = event.item;
+    emit(state.copyWith(favouriteItemList: List.from(itemList)));
+  }
+
+  void _checkItem(AddCheckMark event,Emitter<FavouriteAppState> emit)async{
     final index = itemList.indexWhere((element)=> element.id == event.item.id);
     itemList[index] = event.item;
     emit(state.copyWith(favouriteItemList: List.from(itemList)));
